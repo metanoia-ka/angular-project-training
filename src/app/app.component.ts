@@ -9,11 +9,10 @@ import { MonComposantComponent } from "./components/mon-composant/mon-composant.
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Landry';
-  messageToSend: string = "";
+  messageSent: string = "";
 
   afficheMessage(message: string) {
-    this.messageToSend = message;
-    console.log("Message reçu du composant enfant : " + message);
+    this.messageSent = message;
+    console.log("Message 1 reçu du composant enfant : " + message);
   }
 }
