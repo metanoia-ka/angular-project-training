@@ -1,30 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-// Le décorateur @Component permet de définir un composant Angular
-// Le sélecteur 'app-mon-composant' est utilisé pour référencer ce composant dans d'autres templates
-// imports : On peut importer d'autres composants, directives ou pipes ici si nécessaire
-// templateUrl : Chemin vers le fichier HTML du composant
 @Component({
   selector: 'app-mon-composant',
-  imports: [],
-  templateUrl: './mon-composant.component.html',
-  styleUrl: './mon-composant.component.css'
+  imports: [CommonModule],
+  template: `
+      <h2>Mon-composant works! {{ monUtilisateur }} ✅</h2>
+      <p>Je suis bien en plein apprentissage du frameword Angular ! 🛠️</p>
+      <button (click)="envoyerMessage()">Clique ici pour voir 👇!</button>
+  `
 })
-export class MonComposantComponent implements OnInit, OnDestroy {
+export class MonComposantComponent {
     @Input() monUtilisateur: string = "";
-    @Output() clicBouton = new EventEmitter<string>();
+    @Output() clicGreet = new EventEmitter<string>();
+    count: number = 0;
 
-    ngOnInit(): void {
-      // Cette méthode est appelée une fois que le composant est initialisé
-      console.log("Le composant a été initialisé !");
-    }
-
-    ngOnDestroy(): void {
-      // Cette méthode est appelée juste avant que le composant soit détruit
-      console.log("Le composant est détruit !");
-    }
-
-    envoyerMessage() {  
-      this.clicBouton.emit("Bonjour depuis le composant 👋!");
+    envoyerMessage() { 
+      this.count ++
+      this.clicGreet.emit("Bonjour depuis le composant 👋!");
     }
 }
