@@ -35,6 +35,16 @@ import { CommonModule } from '@angular/common';
       font-weight: bold;
       color: #2a9d8f;
     }
+    button {
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
   `
   ]
 })

@@ -14,6 +14,7 @@ import { TaskListComponent } from "./components/task-list/task-list.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  isLoading = true;
 
   products = [
     {
@@ -27,6 +28,14 @@ export class AppComponent {
       image: 'https://via.placeholder.com/300x150?text=Écran'
     }
   ];
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
 
   addProduct(product: { name: string; price: number; image: string }) {
     this.products.push(product);

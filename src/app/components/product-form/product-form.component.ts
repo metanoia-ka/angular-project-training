@@ -35,7 +35,9 @@ import { FormsModule } from '@angular/forms';
       border: none;
       padding: 10px;
       border-radius: 6px;
+      margin-left: 8px;
       cursor: pointer;
+      transition: transform 0.2s ease;
     }
   `
   ]

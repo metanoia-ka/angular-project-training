@@ -9,13 +9,61 @@ import { Task } from '../../interface/task.interface';
   imports: [CommonModule],
   template: `
     <ul>
-        <li *ngFor="let task of tasksGeneral; let i = index"></li>
-        <span [class.completed]>{{ task.name }}</span>
-        <button (click)="addOneTask(i)">✔️</button>
-        <button (click)="removeTask(i)">❌</button>
+        <li *ngFor="let task of tasksGeneral; let i = index">
+            <span [class.completed]="task.completed">{{ task.name }}</span>
+            <button (click)="toggleTask(i)">✔️</button>
+            <button (click)="removeTask(i)">❌</button>
+      </li>
     </ul>
   `,
-  styles: ``
+  styles: [
+    `
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    input {
+      padding: 10px;
+      margin: 10px 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: grey;
+      transition: all 0.3s ease;
+    }
+
+    li {
+      list-style: none;
+      margin: 10px 0;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+  `
+  ]
 })
 export class TaskListComponent {
 
@@ -23,21 +71,15 @@ export class TaskListComponent {
 
     constructor(private taskService: TaskService) {}
 
-    getTasks(): Task[] {
-        const taskGet = this.taskService.getTasks();
-        this.tasksGeneral = taskGet;
-        return this.tasksGeneral;
+    ngOnInit(): void {
+        this.tasksGeneral = this.taskService.getTasks();
     }
-
-    addOneTask(task: string) {
-        this.taskService.addTask(task);
-    }
-
-    toggleTask(index: number) {
+    
+    toggleTask(index: number): void {
         this.taskService.toggleTaskStatus(index);
     }
 
-    removeTask(index: number) {
-        this.taskService.removeTask(index)
+    removeTask(index: number): void {
+        this.taskService.removeTask(index);
     }
 }
